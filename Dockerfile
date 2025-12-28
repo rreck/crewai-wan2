@@ -1,5 +1,5 @@
 # Copyright (c) RRECKTEK LLC
-# Version: 1.0.0
+# Version: 1.0.2
 # Built: @EPOCH
 
 FROM nvidia/cuda:12.1.0-cudnn8-devel-ubuntu22.04
@@ -25,11 +25,11 @@ RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.11 1
 # Upgrade pip
 RUN python3 -m pip install --upgrade pip
 
-# Install PyTorch with CUDA support (torch >= 2.4.0 required for Wan2)
+# Install PyTorch with CUDA support (torch >= 2.5.0 required for enable_gqa in diffusers)
 RUN pip3 install --no-cache-dir \
-    torch==2.4.0 \
-    torchvision==0.19.0 \
-    torchaudio==2.4.0 \
+    torch==2.5.1 \
+    torchvision==0.20.1 \
+    torchaudio==2.5.1 \
     --index-url https://download.pytorch.org/whl/cu121
 
 # Install Python dependencies

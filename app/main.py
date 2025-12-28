@@ -279,9 +279,8 @@ class WAN2Manager:
                 flow_shift=flow_shift
             )
 
-            if device == "cuda":
-                self.pipe = self.pipe.to(device)
-            # CPU mode: model already loaded on CPU, no offloading needed
+            # Move pipeline to target device
+            self.pipe = self.pipe.to(device)
 
             METRICS.increment('model_loads_total')
             self.logger.info(f"WAN2 model {self.model_name} loaded successfully on {device}")
