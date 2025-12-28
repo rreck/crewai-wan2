@@ -1,0 +1,133 @@
+{
+  "dashboard": {
+    "title": "CrewAI WAN2 Agent Monitoring",
+    "tags": ["crewai", "wan2", "video-generation"],
+    "timezone": "browser",
+    "refresh": "10s",
+    "panels": [
+      {
+        "id": 1,
+        "title": "Job Processing Rate",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "rate(wan2_jobs_processed_total[5m])",
+            "legendFormat": "Processed"
+          },
+          {
+            "expr": "rate(wan2_jobs_failed_total[5m])",
+            "legendFormat": "Failed"
+          }
+        ],
+        "yaxes": [
+          {
+            "label": "Jobs/sec",
+            "format": "short"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Success Rate",
+        "type": "singlestat",
+        "targets": [
+          {
+            "expr": "rate(wan2_jobs_processed_total[5m]) / (rate(wan2_jobs_processed_total[5m]) + rate(wan2_jobs_failed_total[5m])) * 100"
+          }
+        ],
+        "format": "percent",
+        "thresholds": "50,80"
+      },
+      {
+        "id": 3,
+        "title": "Queue Depth",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "wan2_queue_depth",
+            "legendFormat": "Queue Depth"
+          },
+          {
+            "expr": "wan2_active_jobs",
+            "legendFormat": "Active Jobs"
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Processing Time",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "rate(wan2_processing_time_seconds_total[5m]) / rate(wan2_jobs_processed_total[5m])",
+            "legendFormat": "Avg Processing Time"
+          }
+        ],
+        "yaxes": [
+          {
+            "label": "Seconds",
+            "format": "s"
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "title": "Cache Hit Rate",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "rate(wan2_cache_hits_total[5m]) / (rate(wan2_jobs_processed_total[5m]) + rate(wan2_cache_hits_total[5m])) * 100",
+            "legendFormat": "Cache Hit %"
+          }
+        ],
+        "yaxes": [
+          {
+            "label": "Percent",
+            "format": "percent"
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "title": "Agent Uptime",
+        "type": "singlestat",
+        "targets": [
+          {
+            "expr": "wan2_daemon_uptime_seconds"
+          }
+        ],
+        "format": "dtdurations"
+      },
+      {
+        "id": 7,
+        "title": "Model Loads",
+        "type": "counter",
+        "targets": [
+          {
+            "expr": "wan2_model_loads_total",
+            "legendFormat": "Total Model Loads"
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "title": "Jobs Summary",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "wan2_jobs_processed_total",
+            "legendFormat": "Processed"
+          },
+          {
+            "expr": "wan2_jobs_failed_total",
+            "legendFormat": "Failed"
+          },
+          {
+            "expr": "wan2_jobs_skipped_total",
+            "legendFormat": "Skipped"
+          }
+        ]
+      }
+    ]
+  }
+}

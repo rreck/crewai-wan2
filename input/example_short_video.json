@@ -1,0 +1,11 @@
+{
+  "type": "text_to_video",
+  "prompt": "A rocket launching into space with fire and smoke",
+  "num_frames": 49,
+  "height": 480,
+  "width": 720,
+  "num_inference_steps": 30,
+  "guidance_scale": 7.0,
+  "fps": 8,
+  "output_format": "mp4"
+}

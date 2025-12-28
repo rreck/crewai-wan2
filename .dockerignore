@@ -1,0 +1,9 @@
+output/
+kb/
+*.pyc
+__pycache__/
+.git/
+.gitignore
+README.md
+*.log
+.DS_Store
